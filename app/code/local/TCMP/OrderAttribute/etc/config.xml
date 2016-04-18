@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <TCMP_OrderAttribute>
+            <version>0.1.0</version>
+        </TCMP_OrderAttribute>
+    </modules>
+    <global>
+
+        <fieldsets>
+            <sales_convert_quote>
+                <co_account><to_order>*</to_order></co_account>
+                <teas_marketing><to_order>*</to_order></teas_marketing>
+                <freight><to_order>*</to_order></freight>
+                <usps_first_class_mail><to_order>*</to_order></usps_first_class_mail>
+            </sales_convert_quote>
+
+            <sales_convert_order>
+                <co_account><to_quote>*</to_quote></co_account>
+                <teas_marketing><to_quote>*</to_quote></teas_marketing>
+                <freight><to_quote>*</to_quote></freight>
+                <usps_first_class_mail><to_quote>*</to_quote></usps_first_class_mail>
+            </sales_convert_order>
+        </fieldsets>
+
+        <models>
+            <tcmp_orderattribute>
+                <class>TCMP_OrderAttribute_Model</class>
+                <resourceModel>tcmp_orderattribute_resource</resourceModel>
+            </tcmp_orderattribute>
+            <tcmp_orderattribute_resource>
+                <class>TCMP_OrderAttribute_Model_Resource</class>
+            </tcmp_orderattribute_resource>
+        </models>
+
+        <events>
+            <adminhtml_sales_order_create_process_data_before>
+                <observers>
+                    <customorderstatus>
+                        <type>singleton</type>
+                        <class>tcmp_orderattribute/observer</class>
+                        <method>saveNewShip</method>
+                    </customorderstatus>
+                </observers>
+            </adminhtml_sales_order_create_process_data_before>
+        </events>
+
+        <blocks>
+            <tcmp_orderattribute>
+                <class>TCMP_OrderAttribute_Block</class>
+            </tcmp_orderattribute>
+            <adminhtml>
+                <rewrite>
+                    <sales_order_create_form_account>TCMP_OrderAttribute_Block_Adminhtml_Sales_Order_Create_Form_Account</sales_order_create_form_account>
+                    <sales_order_view_info>TCMP_OrderAttribute_Block_Adminhtml_Sales_Order_View_Info</sales_order_view_info>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <helpers>
+            <tcmp_orderattribute>
+                <class>TCMP_OrderAttribute_Helper</class>
+            </tcmp_orderattribute>
+        </helpers>
+        <resources>
+            <tcmp_orderattribute_setup>
+                <setup>
+                    <module>TCMP_OrderAttribute</module>
+                    <class>Mage_Sales_Model_Resource_Setup</class>
+                </setup>
+            </tcmp_orderattribute_setup>
+        </resources>
+    </global>
+</config>

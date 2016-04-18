@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <TCMP_OrderAttribute>
+            <active>true</active>
+            <codePool>community</codePool>
+        </TCMP_OrderAttribute>
+    </modules>
+</config>
